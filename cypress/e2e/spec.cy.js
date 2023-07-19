@@ -1,0 +1,15 @@
+describe('Todo List', () => {
+  it('Test_case', () => {
+    cy.visit('https://forhemer.github.io/React-Todo-List/')
+    cy.get('.input-text').type('First action{enter}')
+    cy.get('.input-text').type('Second action{enter}')
+    cy.get('.input-text').type('Third action{enter}')
+    cy.get('.TodoItem_item__iFWQW').should('have.length', 3)
+    const itemCheckbox = cy.get('.TodoItem_checkbox__Tf0FQ[type="checkbox"]').first()
+    const itemText = cy.get('li.TodoItem_item__iFWQW span').first()
+    itemCheckbox.check()
+    itemText.invoke('css', 'text-decoration').should('include', 'line-through')
+    cy.get('li.TodoItem_item__iFWQW button').first().click()
+    cy.get('.TodoItem_item__iFWQW').should('have.length', 2)
+  })
+})
